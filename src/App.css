@@ -140,3 +140,41 @@
   .choice-emoji { font-size: 36px; }
   .round-message { font-size: 24px; }
 }
+
+.history {
+  width: 100%;
+  text-align: left;
+
+  h2 {
+    font-size: 20px;
+    margin-bottom: 8px;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+}
+
+.history-item {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 15px;
+
+  > :nth-child(2) {
+    flex: 1;
+  }
+}
+
+.history-number {
+  color: var(--text);
+  min-width: 2.5ch;
+}
+
+.history-result {
+  font-weight: 600;
+}
