@@ -1,0 +1,30 @@
+PLAN DU PROJET — MINIGAME
+Jeu Pierre, Feuille, Ciseaux avec React, Vite, CSS et GitHub
+
+1. OBJECTIF
+Créer une petite application web React permettant à un joueur de jouer à Pierre, Feuille, Ciseaux contre l’ordinateur. Le projet est aussi un exercice de collaboration Git : branches séparées, commits, push, Pull Requests et fusion dans main.
+Le projet doit rester simple et réalisable en 2 à 3 heures. Ne pas ajouter de backend, de base de données ou d’API externe.
+
+2. TECHNOLOGIES
+- React
+- Vite
+- JavaScript
+- CSS
+- Git et GitHub
+- localStorage facultatif pour conserver les scores après actualisation
+
+3. FONCTIONNALITÉS OBLIGATOIRES
+- Afficher trois choix interactifs : Pierre, Feuille et Ciseaux.
+- Lorsque le joueur choisit, générer un choix aléatoire pour l’ordinateur.
+- Afficher clairement le choix du joueur et celui de l’ordinateur.
+- Déterminer le résultat : victoire, défaite ou égalité.
+- Mettre à jour les compteurs de victoires, défaites et égalités.
+- Proposer un bouton « Rejouer » ou « Réinitialiser » pour remettre la partie et les scores à zéro.
+- Fournir une interface simple, lisible et responsive sur ordinateur et mobile.
+
+4. RÈGLES DU JEU
+- Pierre bat Ciseaux.
+- Ciseaux bat Feuille.
+- Feuille bat Pierre.
+- Si les deux choix sont identiques, c’est une égalité.
+- Une seule catégorie de score est incrémentée par tour : victoire, défaite ou égalité.
