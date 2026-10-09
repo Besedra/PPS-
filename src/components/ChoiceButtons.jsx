@@ -4,7 +4,7 @@ export const CHOICES = [
   { id: 'ciseaux', label: 'Ciseaux', emoji: '✌️' },
 ]
 
-function ChoiceButtons({ onChoose }) {
+function ChoiceButtons({ onChoose, disabled = false }) {
   return (
     <div className="choices">
       {CHOICES.map((choice) => (
@@ -12,6 +12,7 @@ function ChoiceButtons({ onChoose }) {
           key={choice.id}
           type="button"
           className="choice"
+          disabled={disabled}
           onClick={() => onChoose(choice.id)}
         >
           <span className="choice-emoji" aria-hidden="true">

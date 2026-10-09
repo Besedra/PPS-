@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import ChoiceButtons from './components/ChoiceButtons'
+import Countdown from './components/Countdown'
 import History from './components/History'
 import RoundResult from './components/RoundResult'
 import Scoreboard from './components/Scoreboard'
@@ -7,6 +8,8 @@ import './App.css'
 
 const INITIAL_SCORES = { victoires: 0, defaites: 0, egalites: 0 }
 const HISTORY_SIZE = 10
+const COUNTDOWN_START = 3
+const COUNTDOWN_STEP_MS = 700
 
 // TEMP : logique provisoire, à remplacer par celle de src/game.js (autre branche)
 const IDS = ['pierre', 'feuille', 'ciseaux']
@@ -27,7 +30,15 @@ function App() {
   const [scores, setScores] = useState(INITIAL_SCORES)
   const [history, setHistory] = useState([])
 
+  // pending : choix du joueur en attente pendant le compte à rebours
+  const [pending, setPending] = useState(null)
+
   function handleChoose(joueur) {
+    setRound(null)
+    setPending({ joueur, count: COUNTDOWN_START })
+  }
+
+  function playRound(joueur) {
     const ordi = getComputerChoice()
     const resultat = getResult(joueur, ordi)
     setRound({ joueur, ordi, resultat })
@@ -41,7 +52,21 @@ function App() {
     })
   }
 
+  useEffect(() => {
+    if (!pending) return
+    const timer = setTimeout(() => {
+      if (pending.count > 1) {
+        setPending({ ...pending, count: pending.count - 1 })
+      } else {
+        setPending(null)
+        playRound(pending.joueur)
+      }
+    }, COUNTDOWN_STEP_MS)
+    return () => clearTimeout(timer)
+  }, [pending])
+
   function handleReset() {
+    setPending(null)
     setRound(null)
     setScores(INITIAL_SCORES)
     setHistory([])
@@ -51,8 +76,8 @@ function App() {
     <main className="app">
       <h1>Pierre · Feuille · Ciseaux</h1>
       <Scoreboard scores={scores} />
-      <RoundResult round={round} />
-      <ChoiceButtons onChoose={handleChoose} />
+      {pending ? <Countdown count={pending.count} /> : <RoundResult round={round} />}
+      <ChoiceButtons onChoose={handleChoose} disabled={pending !== null} />
       <button type="button" className="reset" onClick={handleReset}>
         Réinitialiser
       </button>
